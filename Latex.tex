@@ -48,9 +48,9 @@
 \newcommand{\itemSchool}{Escuela Profesional de Ingeniería de Sistemas}
 \newcommand{\itemAcademic}{2023 - B}
 \newcommand{\itemInput}{Del 29 Septiembre 2023}
-\newcommand{\itemOutput}{Al 29 Septiembre 2023}
-\newcommand{\itemPracticeNumber}{05}
-\newcommand{\itemTheme}{ArrayList}
+\newcommand{\itemOutput}{Al 30 Septiembre 2023}
+\newcommand{\itemPracticeNumber}{06}
+\newcommand{\itemTheme}{HashMap}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -161,9 +161,9 @@
     \section{TAREA}
 	\begin{itemize}	
     \subsection{Objetivos:}
-		\item Crear e inicializar ArrayList
-		\item Realizar búsquedas secuencial y binaria en un ArrayList
-        \item Implementar métodos de ordenamiento en ArrayList
+		\item Crear e inicializar HashMaps
+		\item Realizar búsquedas secuencial y binaria en un HashMap
+        \item Implementar métodos de ordenamiento en HashMap
         \item Solucionar problemas
     \subsection{Competencias a alcanzar:}
 		\item Diseña, responsablemente, sistemas, componentes o procesos para satisfacer necesidades dentro de restricciones realistas: económicas, medio ambientales, sociales, políticas, éticas, de salud, de seguridad, manufacturación y sostenibilidad.
@@ -181,517 +181,198 @@
 	\begin{itemize}
 		\item URL para el Repositorio GitHub.
 		\item \url{https://github.com/RONI-COMPANOCCA-CHECCO}
-		\item URL para el laboratorio 05 en el Repositorio GitHub.	
-        \item \url{https://github.com/RONI-COMPANOCCA-CHECCO/FP2-LAB5}
+		\item URL para el laboratorio 06 en el Repositorio GitHub.	
+        \item \url{https://github.com/RONI-COMPANOCCA-CHECCO/FP2-LAB6}
 	\end{itemize}
     
     \section{ACTIVIDADES}
 	\begin{itemize}
         \subsection{EJERCICIO RESUELTO}
-		\item - Creamos la Clase ColeccionesList con los siguientes métodos que realizan las operaciones que se pueden realizar con el ArrayList:
+		\item - Creamos la Clase ColeccionesMap con los siguientes métodos que realizan las operaciones que se pueden realizar con el HashMap:
 
         \begin{lstlisting}[language=java]
 // RONI COMPANOCCA CHECCO
 // CUI: 20210558
-// LABORATORIO 05
+// LABORATORIO 06
 // FUNDAMENTOS DE PROGRAMACION 
-import java.util.List;
-import java.util.ArrayList;
+// EJERCICIO PROPUESTO DESARROLLADO
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class ColeccionesList{
+public class ColeccionesMap{
     static Scanner consola = new Scanner(System.in);
-    // implementacion de la interfaz
-    List<String> listaCadenas = new ArrayList<String>();
-    
-    public void llenarArrayList(){
-        // agregamos elementos
-        listaCadenas.add("Arequipa");
-        listaCadenas.add("Tacna");
-        listaCadenas.add("Moquegua");
-        listaCadenas.add("Trujillo");
-        listaCadenas.add("Lima");
-        listaCadenas.add("Chiclayo");
-        listaCadenas.add("Cajamarca");
-        // permite duplicados
-        listaCadenas.add("Cajamarca");
-        listaCadenas.add("Cuzco");
-        listaCadenas.add("Arequipa");
-        Iterator iterador = listaCadenas.iterator();
-        // recorremos y mostramos contenido de lista
-        System.out.println(("\nARRAYLIST\n"));
-        while(iterador.hasNext()){
-            String elemento = (String) iterador.next();
-            System.out.println(elemento);
-        }
-        // muestra el tamaño de la lista
-        System.out.println("Tamaño: "+listaCadenas.size());
-        // retorna un objeto segun su posicion
-        int indice = listaCadenas.indexOf("Arequipa");
-        System.out.println("Elemento: "+listaCadenas.get(indice)+"Posicion: "+indice);
-        indice = listaCadenas.indexOf("Lima");
-        System.out.println("Elemento: "+listaCadenas.get(indice)+"Posicion: "+indice);
-    }
-        
-    public void buscarEnArrayList(){
-        //busqueda de un objeto dentro de la coleccion
-        System.out.println("Ingrese un valor a Buscar: ");
-        String objetoBuscar = consola.next();
+    // interfaz implement
+    Map diccionario1 = new HashMap();
+    public void llenarHashMap(){
+        // Insertar valores "key"-"value" al HashMap
+        diccionario1.put("29458865","Maria");
+        diccionario1.put("28784599","Jose");
+        diccionario1.put("26558899","Luis");
+        diccionario1.put("45785214","Juan");
+        diccionario1.put("48889566","Mariela");
+        diccionario1.put("48889544","Carlos");
+        diccionario1.put("12389566","Rosa");
+        diccionario1.put("48889540","Carlos");
+        diccionario1.put("26558890","Luis");
 
-        if(listaCadenas.contains(objetoBuscar)){
-            System.out.println(objetoBuscar+" Se encuentra en la Lista");
-        }else {
-            System.out.println(objetoBuscar+" No se encuentra!!");
+        // definir iterator ara extraer o imprimir valores
+        // recorremos y mostramos el diccionario
+        for(Iterator iterador1 = diccionario1.keySet().iterator(); iterador1.hasNext();){
+            String key = (String)iterador1.next();
+            String value = (String)diccionario1.get(key);
+            System.out.println("DNI: "+key+" Alumno: "+value);
         }
-        
+        // mstramos el tamaño del diccionario
+        System.out.println("Tamaño: "+diccionario1.size());
     }
 
-    public void eliminarEnArrayList(){
-        //eliminar un objeto de la coleccion
-        System.out.println("Ingrese un valor a Borrar: ");
-        String objetoBorrar1 = consola.next();
-        int posicion = listaCadenas.indexOf(objetoBorrar1);
-        listaCadenas.remove(posicion);
-
-        //eliminar todos los objeto de la coleccion
-        listaCadenas.clear();
-        if (listaCadenas.isEmpty()){
-            System.out.println("La lista se encuentra vacia");
+    public void buscarEnHashMap(){
+        // buscamos un valor en el diccionario
+        System.out.println("Ingrese un Nombre a Buscar: ");
+        String nombre = consola.next();
+        if(diccionario1.containsValue(nombre)){
+            System.out.println((nombre+" se encuentra en el Diccionario"));
+        }else{
+            System.out.println(nombre+ " No se encuentra!!");
         }
+    }
+
+    public void eliminarEnHashMap(){
+        // eliminamos un valor en el diccionario
+        System.out.println("Ingrese un Codigo a Eliminar: ");
+        String llave = consola.next();
+        diccionario1.remove( llave);
+
+        for(Object key : diccionario1.keySet()){
+            String llave2 = (String)key;
+            String value2 = (String)diccionario1.get(llave2);
+            System.out.println("DNI: "+llave2+" Alumno: "+value2);
+        }
+    }
+
+    public void reemplazarEnHashMap(){
+        // reemplazamos un valor en el diccionario
+        System.out.println("Ingrese un codigo a reemplazar: ");
+        String llave2 = consola.next();
+        System.out.println("Ingrese el Nuevo Valor: ");
+        String valorNuevo = consola.next();
+        diccionario1.replace(llave2, valorNuevo);
+        
+        for(Object key3 : diccionario1.keySet()){
+            String llave3 = (String)key3;
+            String value3 = (String)diccionario1.get(llave3);
+            System.out.println(("DNI: "+llave3+" Alumno: "+value3));
+        } 
     }
 }
         \end{lstlisting}
-		\item Segundo: Creamos la Clase Main, donde llamamos a nuestra clase y las operaciones implementadas:
+		\item Creamos la Clase Main, donde llamamos a nuestra clase y las operaciones implementadas:
         \begin{lstlisting}[language=java]
-public class ArrayList01 {
+public class Map01 {
     public static void main(String[] args){
-        ColeccionesList coleccion01 = new ColeccionesList();
-        System.out.println("--------------------");
-        System.out.println("COLECCION ARRAYLIST");
-        System.out.println("--------------------");
-        coleccion01.llenarArrayList();
-        coleccion01.buscarEnArrayList();
-        coleccion01.eliminarEnArrayList();
+        ColeccionesMap coleccion01 = new ColeccionesMap();
+        System.out.println("----------------------");
+        System.out.println("COLECCION HASHMAP");
+        System.out.println("----------------------");
+        coleccion01.llenarHashMap();
+        coleccion01.buscarEnHashMap();
+        coleccion01.reemplazarEnHashMap();
+        coleccion01.eliminarEnHashMap();
     }
-    
 }
         \end{lstlisting}
-        \item Ejecucion
+        \item Ejecucion: Ejecutamos el ejercicio desarrollado por la cual nos como respuesta lo siguiente.
         \begin{lstlisting}[language=java]
---------------------
-COLECCION ARRAYLIST
---------------------
-
-ARRAYLIST
-
-Arequipa
-Tacna
-Moquegua
-Trujillo
-Lima
-Chiclayo
-Cajamarca
-Cajamarca
-Cuzco
-Arequipa
-Tamaño: 10
-Elemento: ArequipaPosicion: 0
-Elemento: LimaPosicion: 4
-Ingrese un valor a Buscar:
-4
-4 No se encuentra!!
-Ingrese un valor a Borrar:
-4
+----------------------
+COLECCION HASHMAP
+----------------------
+DNI: 26558899 Alumno: Luis
+DNI: 48889540 Alumno: Carlos
+DNI: 28784599 Alumno: Jose
+DNI: 29458865 Alumno: Maria
+DNI: 48889566 Alumno: Mariela
+DNI: 48889544 Alumno: Carlos
+DNI: 12389566 Alumno: Rosa
+DNI: 26558890 Alumno: Luis
+DNI: 45785214 Alumno: Juan
+Tamaño: 9
+Ingrese un Nombre a Buscar:
+Carlos
+Carlos se encuentra en el Diccionario
+Ingrese un codigo a reemplazar:
+48889544
+Ingrese el Nuevo Valor:
+Roni
+DNI: 26558899 Alumno: Luis
+DNI: 48889540 Alumno: Carlos
+DNI: 28784599 Alumno: Jose
+DNI: 29458865 Alumno: Maria
+DNI: 48889566 Alumno: Mariela
+DNI: 48889544 Alumno: Roni
+DNI: 12389566 Alumno: Rosa
+DNI: 26558890 Alumno: Luis
+DNI: 45785214 Alumno: Juan
+Ingrese un Codigo a Eliminar:
+48889544
+DNI: 26558899 Alumno: Luis
+DNI: 48889540 Alumno: Carlos
+DNI: 28784599 Alumno: Jose
+DNI: 29458865 Alumno: Maria
+DNI: 48889566 Alumno: Mariela
+DNI: 12389566 Alumno: Rosa
+DNI: 26558890 Alumno: Luis
+DNI: 45785214 Alumno: Juan
         \end{lstlisting}
 
         \subsection{EJERCICIO PROPUESTO}
-        \item Cree un Proyecto llamado Laboratorio5
-        \item Usted deberá crear las dos clases Soldado.java y VideoJuego3.java. Puede reutilizar lo desarrollado en Laboratorios anteriores.
+        \item Cree un Proyecto llamado Laboratorio6
+        \item Usted deberá crear las dos clases Soldado.java y VideoJuego5.java. Puede reutilizar lo desarrollado en Laboratorios anteriores.
         \item Del Soldado nos importa el nombre, puntos de vida, fila y columna (posición en el tablero).
-        \item El juego se desarrollará en el mismo tablero de los laboratorios anteriores. Pero ahora el tablero debe ser un ArrayList bidimensional.
-        \item Tendrá 2 Ejércitos. Inicializar el tablero con n soldados aleatorios entre 1 y 10 para cada Ejército. Cada soldado tendrá un nombre autogenerado: Soldado0X1, Soldado1X1, etc., un valor de puntos de vida autogenerado aleatoriamente [1..5], la fila y columna también autogenerados aleatoriamente (no puede haber 2 soldados en el mismo cuadrado). Se debe mostrar el tablero con todos los soldados creados (distinguir los de un ejército de los del otro ejército). Además de los datos del Soldado con mayor vida de cada ejército, el promedio de puntos de vida de todos los soldados creados por ejército, los datos de todos los soldados por ejército en el orden que fueron creados y un ranking de poder de todos los soldados creados por ejército (del que tiene más nivel de vida al que tiene menos) usando 2 diferentes algoritmos de ordenamiento. Finalmente, que muestre qué ejército ganará la batalla (indicar la métrica usada para decidir al ganador de la batalla).
+        \item El juego se desarrollará en el mismo tablero de los laboratorios anteriores. Para crear el tablero utilice la estructura de datos más adecuada.
+        \item Tendrá 2 Ejércitos (usar HashMaps). Inicializar el tablero con n soldados aleatorios entre 1 y 10 para cada Ejército. Cada soldado tendrá un nombre autogenerado: Soldado0X1, Soldado1X1, etc., un valor de puntos de vida autogenerado aleatoriamente [1..5], la fila y columna también autogenerados aleatoriamente (no puede haber 2 soldados en el mismo cuadrado). Se debe mostrar el tablero con todos los soldados creados (distinguir los de un ejército de los del otro ejército). Además de los datos del Soldado con mayor vida de cada ejército, el promedio de puntos de vida de todos los soldados creados por ejército, los datos de todos los soldados por ejército en el orden que fueron creados y un ranking de poder de todos los soldados creados por ejército (del que tiene más nivel de vida al que tiene menos) usando 2 diferentes algoritmos de ordenamiento (indicar conclusiones respecto a este ordenamiento de HashMaps). Finalmente, que muestre qué ejército ganará la batalla (indicar la métrica usada para decidir al ganador de la batalla). Hacerlo como programa iterativo.
         
-        \item la clase VideoJuego3.java        
+        \item la clase VideoJuego5.java        
         \begin{lstlisting}[language=java]
 // RONI COMPANOCCA CHECCO
 // CUI: 20210558
-// LABORATORIO 05
+// LABORATORIO 06 - HASHMAP
 // FUNDAMENTOS DE PROGRAMACION 
-import java.util.*;
 
-public class VideoJuego3 {
-
-	public static void main(String[] args) {
-
-		//DECLARACION DE VARIABLES Y ARREGLOS NECESARIOS
-		ArrayList<Soldado> ejercito1 = new ArrayList();
-		ArrayList<Soldado> ejercito2 = new ArrayList();
-		ArrayList<ArrayList<Soldado>> tablero = new ArrayList();
-		int batallon1, batallon2;
-		int vidatotal1=0, vidatotal2=0;
-		double promedioVida1=0, promedioVida2=0;
-
-		// BUCLE PARA DESIGNAR LA CANTIDAD DE FILAS Y COLUMNAS DEL TABLERO
-		for(int i=0; i<10; i++) {
-			tablero.add(new ArrayList<Soldado>());
-			for(int j=0; j<10; j++) {
-				tablero.get(i).add(new Soldado());
-			}
-		}
-
-		// CREACION DEL NUMERO DE POSICIONES DE CADA EJERCITO
-		batallon1 = aleatorio(1,10);
-		batallon2 = aleatorio(1,10);
-
-		// INICIALIZAR ARREGLOS
-		inicializarArreglo(ejercito1, batallon1);
-		inicializarArreglo(ejercito2, batallon2);
-
-		// GENERAR EJERCITOS VALIDOS
-		generarEjercitos(ejercito1, ejercito2);
-
-		// AÑADIR LOS EJERCITOS AL TABLERO
-		añadirTablero(ejercito1, tablero);
-		añadirTablero(ejercito2, tablero);
-
-		//IMPRIMIR EL TABLERO
-		imprimirTablero(tablero);
-
-		//IMPRIMIR LOS SOLDADOS DE MAYOR VIDA DE CADA EJERCITO
-		System.out.println("Soldado de mayor vida del ejercito 1");
-		SoldadoConMayorVida(ejercito1);
-		System.out.println("soldado de mayor vida del ejercito 2");
-		SoldadoConMayorVida(ejercito2);
-
-		//IMPRIMIR LA VIDA TOTAL Y EL PROMEDIO DEL EJERCITO 1
-		System.out.println("\nEJERCITO 1: ");
-		for (int i=0; i<ejercito1.size(); i++) {
-			vidatotal1+=ejercito1.get(i).getPuntos();
-			promedioVida1 = vidatotal1/(ejercito1.size()*1.0);
-		}
-		System.out.println("Vida total: "+vidatotal1);
-		System.out.println("Promedio de vida: "+promedioVida1);
-		
-		//IMPRIMIR LA VIDA TOTAL Y EL PROMEDIO DEL EJERCITO 2
-		System.out.println("\nEJERCITO 2: ");
-		for (int i=0; i<ejercito2.size(); i++) {
-			vidatotal2+=ejercito2.get(i).getPuntos();
-			promedioVida2 = vidatotal2/(ejercito2.size()*1.0);
-		}
-		System.out.println("Vida total: "+vidatotal2);
-		System.out.println("Promedio de vida: "+promedioVida2);
-
-		//IMPRIMIR LOS SOLDADOS CREADOS EN EL ORDEN POR DEFECTO
-		System.out.println("\nLista ejercito 1:");
-		for(int i=0; i<ejercito1.size(); i++) {
-			imprimir(ejercito1.get(i));
-		}
-		System.out.println("\nLista ejercito 2:");
-		for(int i=0; i<ejercito2.size(); i++) {
-			imprimir(ejercito2.get(i));
-		}
-
-		// IMPRIMIR LOS DATOS DE LOS SOLDADOS ORDENADOS DE MAYOR A MENOR DEPENDIENDO DE SU NIVEL DE VIDA USANDO DOS TIPOS DE ALGORITMO
-		ordenarPorVidaMetodoA(ejercito1);
-		ordenarPorVidaMetodoB(ejercito2);
-		System.out.println("\nEjercito 1 Ordenados por nivel de vida");
-		for(int i=0; i<ejercito1.size(); i++) {
-			imprimir(ejercito1.get(i));
-		}
-		System.out.println("\nEjercito 2 Ordenados por nivel de vida");
-		for(int i=0; i<ejercito2.size(); i++) {
-			imprimir(ejercito2.get(i));
-		}
-		
-		// MOSTRAR EJERCITO GANADOR LA METRICA USADA ARA DESIGNAR AL GANADOR ES POR EL NIVEL DEL PROMEDIO DE VIDA DE CADA EJERCITO
-		if(promedioVida1>promedioVida2) {
-			System.out.println("\nGANADOR ***EJERCITO 1***");
-		}else if (promedioVida1<promedioVida2) {
-			System.out.println("\nGANADOR ***EJERCITO 2***");
-			}
-		else {
-			System.out.print("\n***ES UN EMPATE***");
-		}
-	}
-
-	// METODO PARA CREAR NUMEROS ALEATORIOS EN UN RANGO
-	public static int aleatorio(int min, int max) {
-		return(int)(Math.random()*(max-min+1)+min);
-	}
-
-	// METODO PARA INICIAR UN ARRAYLIST
-	public static void inicializarArreglo (ArrayList<Soldado> soldadito, int num) {
-		for (int i=0; i<num; i++) {
-			soldadito.add(new Soldado());
-		}
-	}
-
-	// METODO PARA GENERAR DATOS DEL OBJETO SOLDADO
-	public static Soldado generarDatos() {
-		Soldado soldadito = new Soldado();
-		soldadito.setPuntos(aleatorio(1,5));
-		soldadito.setColumna(aleatorio(1,10));
-		soldadito.setFila(aleatorio(1,10));
-		return soldadito;
-	}
-
-	// METODOS PARA GENERAR LOS EJERCITOS DE MANERA ALEATORIA
-	public static void generarEjercitos(ArrayList<Soldado>B1, ArrayList<Soldado>B2) {
-		ArrayList<Soldado>Soldados = new ArrayList();
-		Soldados.add(generarDatos());
-		for (int i=1; i<(B1.size()+B2.size()); i++) {
-			Soldados.add(generarDatos());
-			for (int j=0; j<i; j++) {
-				if(Soldados.get(i).getFila()==Soldados.get(j).getFila()) {
-					if(Soldados.get(i).getColumna()==Soldados.get(j).getColumna()){
-						Soldados.remove(i);
-						i--;
-					}
-				}
-			}
-		}
-		for (int i=0; i<B1.size(); i++) {
-			B1.add(i, Soldados.get(i));
-			B1.get(i).setNombre("Soldado"+i+"x1");
-			B1.get(i).setColumn(B1.get(i).getPuntos()+"[E1]");
-			B1.remove(i+1);
-		}
-		for (int i=0; i<B2.size(); i++) {
-			B2.add(i, Soldados.get(i+B1.size()));
-			B2.get(i).setNombre("Soldado"+i+"x2");
-			B2.remove(i+1);
-			B2.get(i).setColumn(B2.get(i).getPuntos()+"[E2]");
-		}
-	}
-
-	// METODO PARA AÑADIR LOS EJERCITOS AL TABLERO
-	public static void añadirTablero(ArrayList<Soldado>soldadito, ArrayList<ArrayList<Soldado>>table) {
-		for (int i=0; i<soldadito.size(); i++) {
-			table.get(soldadito.get(i).getColumna()-1).add(soldadito.get(i).getFila()-1,soldadito.get(i));
-			table.get(soldadito.get(i).getColumna()-1).remove(soldadito.get(i).getFila());
-		}
-	}
-
-	// METODO PARA IMPRIMIR EL TABLERO EN LA CUAL SE DESARROLLA EL JUEGO
-	public static void imprimirTablero(ArrayList<ArrayList<Soldado>> table) {
-		System.out.println("\tA\tB\tC\tD\tF\tG\tH\tI\tJ");
-		for(int i=0; i<table.size(); i++) {
-			System.out.print(i+1);
-			for(int j=0; j<table.get(i).size();j++) {
-				System.out.print("\t"+table.get(i).get(j).getColumn());
-			}
-			System.out.println("\n");
-		}
-	}
-	
-	//METODO PARA IMPRIMIR LOS SOLDADOS DE MAYOR VIDA
-	public static void SoldadoConMayorVida (ArrayList<Soldado>soldadito) {
-		Soldado mayor = new Soldado();
-		mayor.setPuntos(0);
-		for(int i=0; i<soldadito.size();i++) {
-			if (mayor.getPuntos()<soldadito.get(i).getPuntos()) {
-				mayor = soldadito.get(i);
-			}
-		}
-		imprimir(mayor);
-	}
-	
-	// METODO PARA IMPRIMIR EL NOMBRE, LA POSICION Y NIVEL DE VIDA DEL SOLDADO
-	public static void imprimir(Soldado soldadito) {
-		System.out.println("Nombre: "+soldadito.getNombre()+"\nPosicion: "+soldadito.getColumna()+"X"+soldadito.getFila()+"\tVida: "+soldadito.getPuntos());
-	}
-	
-	// METODO QUE NOS AYUDA A ORDENAR LOS SOLDADOS DE ACUERDO A SU NIVEL DE VIDA, USUANDO UN ALGORITMO DE ORDENAMIENTO DE BURBUJA
-	public static void ordenarPorVidaMetodoA(ArrayList<Soldado>soldadito) {
-		Soldado aux = new Soldado();
-		for(int i=0; i<soldadito.size()-1; i++) {
-			for(int j=0; j<soldadito.size()-i-1; j++) {
-				if(soldadito.get(j).getPuntos()<soldadito.get(j+1).getPuntos()) {
-					aux = soldadito.get(j);
-					soldadito.set(j,soldadito.get(j+1));
-					soldadito.set(j+1,aux);
-				}
-			}
-		}
-	}
-
-    // METODO QUE NOS AYUDA A ORDENAR LOS SOLDADOS DE ACUERDO A SU NIVEL DE VIDA, EN ESTA OCACION DIFERENTE A LA ANTERIOR QUE ERA ALGORITMO DE BURBUJA
-    public static void ordenarPorVidaMetodoB(ArrayList<Soldado> soldadito) {
-        Collections.sort(soldadito, new Comparator<Soldado>() {
-            public int compare(Soldado s1, Soldado s2) {
-                // Orden descendente por puntos de vida
-                return Integer.compare(s2.getPuntos(), s1.getPuntos());
-            }
-        });
-    }
-}
         \end{lstlisting}
 
         \item la clase Soldado.java
         \begin{lstlisting}[language=java]
 // RONI COMPANOCCA CHECCO
 // CUI: 20210558
-// LABORATORIO 05
-// FUNDAMENTOS DE PROGRAMACION - laboratorio
-// clase Soldado.java
-public class Soldado {
-	private String nombre;
-	private int fila;
-	private int columna;
-	private int puntos;
-	private String column;
-	
-	public Soldado() {
-		nombre = "";
-		fila = 0;
-		columna = 0;
-		puntos = 0;
-		column = "";
-	}
-
-	// METODOS MUTADORES
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public void setFila(int fila) {
-		this.fila = fila;
-	}
-
-	public void setColumna(int columna) {
-		this.columna = columna;
-	}
-
-	public void setPuntos(int puntos) {
-		this.puntos = puntos;
-	}
-	
-	public void setColumn(String column) {
-		this.column = column;
-	}
-
-	// METODOS ACCESORES
-	public String getNombre() {
-		return nombre;
-	}
-
-	public int getFila() {
-		return fila;
-	}
-
-	public int getColumna() {
-		return columna;
-	}
-
-	public int getPuntos() {
-		return puntos;
-	}
-	
-	public String getColumn() {
-		return column;
-	}
-}
+// LABORATORIO 06
+// FUNDAMENTOS DE PROGRAMACION - LABORATORIO
          \end{lstlisting}
 
          \item Ejecucion
          \begin{lstlisting}[language=java]
-        A       B       C       D       F       G       H       I       J
-1
 
-2                       1[E2]
-
-3
-
-4
-
-5                       3[E2]                   1[E1]
-
-6               2[E2]                   2[E2]   2[E2]
-
-7                       5[E2]                   4[E2]
-
-8
-
-9
-
-10
-
-Soldado de mayor vida del ejercito 1
-Nombre: Soldado0x1
-Posicion: 5X6   Vida: 1
-soldado de mayor vida del ejercito 2
-Nombre: Soldado4x2
-Posicion: 7X3   Vida: 5
-
-EJERCITO 1:
-Vida total: 1
-Promedio de vida: 1.0
-
-EJERCITO 2:
-Vida total: 19
-Promedio de vida: 2.7142857142857144
-
-Lista ejercito 1:
-Nombre: Soldado0x1
-Posicion: 5X6   Vida: 1
-
-Lista ejercito 2:
-Nombre: Soldado0x2
-Posicion: 6X5   Vida: 2
-Nombre: Soldado1x2
-Posicion: 2X3   Vida: 1
-Nombre: Soldado2x2
-Posicion: 6X2   Vida: 2
-Nombre: Soldado3x2
-Posicion: 6X6   Vida: 2
-Nombre: Soldado4x2
-Posicion: 7X3   Vida: 5
-Nombre: Soldado5x2
-Posicion: 5X3   Vida: 3
-Nombre: Soldado6x2
-Posicion: 7X6   Vida: 4
-
-Ejercito 1 Ordenados por nivel de vida
-Nombre: Soldado0x1
-Posicion: 5X6   Vida: 1
-
-Ejercito 2 Ordenados por nivel de vida
-Nombre: Soldado4x2
-Posicion: 7X3   Vida: 5
-Nombre: Soldado6x2
-Posicion: 7X6   Vida: 4
-Nombre: Soldado5x2
-Posicion: 5X3   Vida: 3
-Nombre: Soldado0x2
-Posicion: 6X5   Vida: 2
-Nombre: Soldado2x2
-Posicion: 6X2   Vida: 2
-Nombre: Soldado3x2
-Posicion: 6X6   Vida: 2
-Nombre: Soldado1x2
-Posicion: 2X3   Vida: 1
-
-GANADOR ***EJERCITO 2***
          \end{lstlisting}
  
     \section{CUESTIONARIO}
 
 	\begin{itemize}
-	\subsection {¿Cómo se declara e inicializa un ArrayList bidimensional?}
-        \item En Java, no existe un tipo de dato ArrayList bidimensional como tal. Sin embargo, puedes lograr una funcionalidad similar utilizando un ArrayList de ArrayLists, lo que te permitirá crear una estructura de datos bidimensional.
+	\subsection {¿Cómo se declara e inicializa un HashMap?}
+        \item Para declarar e inicializar un HashMap en Java
         \begin{lstlisting}[language=java]
-        ArrayList<ArrayList<Integer>> matriz = new ArrayList<>();
+        import java.util.HashMap;
+        HashMap<KeyType, ValueType> nombreDelMapa = new HashMap<>();
         \end{lstlisting}
 		
-    \subsection {¿Qué ventajas tienen los ArrayList con respecto a los arreglos?}
-        \item Los ArrayList en Java tienen varias ventajas con respecto a los arreglos (arrays) que los hacen una elección más flexible y poderosa en muchas situaciones: Tamaño dinámico, Inserción y eliminación eficiente, Flexibilidad, Métodos útiles, Uso de autoboxing, etc.
+    \subsection {¿Qué ventajas tienen los HashMap con respecto a los arreglos y ArrayList?}
+        \item Los HashMap en Java y otras estructuras de datos basadas en tablas de hash ofrecen varias ventajas en comparación con los arreglos (arrays) y ArrayLists como: Búsqueda eficiente, flexibilidad en las claves, capacidad dinámica, eliminación eficiente, no hay restricciones en la ubicación, claves únicas, etc.
 
-	\subsection {¿Mencione 4 métodos importantes del ArrayList? ¿Qué finalidad tienen?}
-        \item add(E elemento): Este método se utiliza para agregar un elemento al final del ArrayList. La finalidad principal de este método es aumentar la capacidad del ArrayList si es necesario y agregar el elemento especificado al final de la lista.
-        \item remove(int índice): Este método se usa para eliminar el elemento en el índice especificado del ArrayList. La finalidad principal es eliminar un elemento en una posición particular de la lista.
-        \item get(int índice): Este método se emplea para obtener el elemento en el índice especificado del ArrayList. La finalidad es recuperar un elemento en una posición particular de la lista.
-        \item size(): Este método devuelve el número de elementos en el ArrayList. La finalidad es conocer la cantidad de elementos presentes en la lista.
+	\subsection {¿Mencione 4 métodos importantes del HashMap? ¿Qué finalidad tienen?}
+        \item put(Key key, Value value): Agregar un par clave-valor al HashMap. Si la clave ya existe en el mapa, el valor asociado se actualiza con el nuevo valor proporcionado. Si la clave no existe, se crea un nuevo par clave-valor en el mapa.
+        \item get(Object key): Recuperar el valor asociado con una clave específica en el HashMap.
+        \item remove(Object key): Eliminar el par clave-valor asociado con la clave proporcionada del HashMap.
+        \item containsKey(Object key): Verificar si el HashMap contiene una clave específica. Devuelve true si la clave existe en el mapa y false en caso contrario.
 	\end{itemize}
 	
 	\section{REFERENCIAS}

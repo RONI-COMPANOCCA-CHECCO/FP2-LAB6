@@ -71,8 +71,8 @@ public class VideoJuego5 {
         // IMPRIMIR LOS DATOS DE LOS SOLDADOS ORDENADOS DE MAYOR A MENOR DEPENDIENDO DE SU NIVEL DE VIDA
         ArrayList<Soldado> listaSoldados1 = new ArrayList<>(ejercito1.values());
         ArrayList<Soldado> listaSoldados2 = new ArrayList<>(ejercito2.values());
-        ordenarPorVidaMetodoA(listaSoldados1);
-        ordenarPorVidaMetodoB(listaSoldados2);
+        ordenarPorVidaMetodoA(Soldados1);
+        ordenarPorVidaMetodoB(Soldados2);
         System.out.println("\nEjército 1 Ordenados por nivel de vida");
         for (Soldado soldado : listaSoldados1) {
             imprimir(soldado);
@@ -92,13 +92,63 @@ public class VideoJuego5 {
         }
     }
 
-    // Resto del código permanece igual
-    // ...
-
+    // METODO PARA CREAR NUMEROS ALEATORIOS EN UN RANGO
+	public static int aleatorio(int min, int max) {
+		return(int)(Math.random()*(max-min+1)+min);
+	}
+    
     // METODO PARA INICIAR UN EJÉRCITO
     public static void inicializarEjercito(HashMap<String, Soldado> ejercito, int num) {
         for (int i = 0; i < num; i++) {
             ejercito.put("Soldado" + i, new Soldado());
+        }
+    }
+
+	// METODO PARA GENERAR DATOS DEL OBJETO SOLDADO
+	public static Soldado generarDatos() {
+		Soldado soldadito = new Soldado();
+		soldadito.setPuntos(aleatorio(1,5));
+		soldadito.setColumna(aleatorio(1,10));
+		soldadito.setFila(aleatorio(1,10));
+		return soldadito;
+	}
+
+	// METODOS PARA GENERAR LOS EJERCITOS DE MANERA ALEATORIA
+    public static void generarEjercitos(HashMap<String, Soldado> ejercito1, HashMap<String, Soldado> ejercito2, HashMap<String, Soldado> tablero) {
+        ArrayList<String> posicionesOcupadas = new ArrayList<>();
+        
+        // Generar los soldados y asegurarse de que sus posiciones sean únicas
+        for (int i = 0; i < ejercito1.size() + ejercito2.size(); i++) {
+            Soldado soldado = generarDatos();
+            String posicion = soldado.getFila() + "x" + soldado.getColumna();
+            
+            // Verificar que la posición no esté ocupada
+            while (posicionesOcupadas.contains(posicion)) {
+                soldado = generarDatos();
+                posicion = soldado.getFila() + "x" + soldado.getColumna();
+            }
+            
+            posicionesOcupadas.add(posicion);
+            
+            // Asignar soldado a ejército 1 o ejército 2
+            if (i < ejercito1.size()) {
+                ejercito1.put("Soldado" + i + "x1", soldado);
+            } else {
+                ejercito2.put("Soldado" + (i - ejercito1.size()) + "x2", soldado);
+            }
+            
+            // Asignar soldado al tablero
+            tablero.put(posicion, soldado);
+        }
+        
+        // Actualizar las columnas de los soldados en ejército 1 y ejército 2
+        for (String clave : ejercito1.keySet()) {
+            Soldado soldado = ejercito1.get(clave);
+            soldado.setColumn(soldado.getPuntos() + "[E1]");
+        }
+        for (String clave : ejercito2.keySet()) {
+            Soldado soldado = ejercito2.get(clave);
+            soldado.setColumn(soldado.getPuntos() + "[E2]");
         }
     }
 
@@ -123,6 +173,70 @@ public class VideoJuego5 {
         }
     }
 
-    // Resto del código permanece igual
-    // ...
+    //METODO PARA IMPRIMIR LOS SOLDADOS DE MAYOR VIDA
+	public static void SoldadoConMayorVida(HashMap<String, Soldado> soldados) {
+        Soldado mayor = null;
+    
+        for (Soldado soldado : soldados.values()) {
+            if (mayor == null || soldado.getPuntos() > mayor.getPuntos()) {
+                mayor = soldado;
+            }
+        }
+    
+        if (mayor != null) {
+            imprimir(mayor);
+        } else {
+            System.out.println("No se encontraron soldados.");
+        }
+    }
+	
+	// METODO PARA IMPRIMIR EL NOMBRE, LA POSICION Y NIVEL DE VIDA DEL SOLDADO
+	public static void imprimir(Soldado soldadito) {
+		System.out.println("Nombre: "+soldadito.getNombre()+"\nPosicion: "+soldadito.getColumna()+"X"+soldadito.getFila()+"\tVida: "+soldadito.getPuntos());
+	}
+	
+	// METODO QUE NOS AYUDA A ORDENAR LOS SOLDADOS DE ACUERDO A SU NIVEL DE VIDA, USUANDO UN ALGORITMO DE ORDENAMIENTO DE BURBUJA
+	public static void ordenarPorVidaMetodoA(HashMap<String, Soldado> soldados) {
+        // Obtener los valores (los soldados) del HashMap y almacenarlos en una lista
+        List<Soldado> listaSoldados = new ArrayList<>(soldados.values());
+    
+        Soldado aux = new Soldado();
+        for (int i = 0; i < listaSoldados.size() - 1; i++) {
+            for (int j = 0; j < listaSoldados.size() - i - 1; j++) {
+                if (listaSoldados.get(j).getPuntos() < listaSoldados.get(j + 1).getPuntos()) {
+                    aux = listaSoldados.get(j);
+                    listaSoldados.set(j, listaSoldados.get(j + 1));
+                    listaSoldados.set(j + 1, aux);
+                }
+            }
+        }
+    
+        // Actualizar el HashMap con los soldados ordenados
+        int index = 0;
+        for (String clave : soldados.keySet()) {
+            soldados.put(clave, listaSoldados.get(index));
+            index++;
+        }
+    }
+
+    // METODO QUE NOS AYUDA A ORDENAR LOS SOLDADOS DE ACUERDO A SU NIVEL DE VIDA, EN ESTA OCACION DIFERENTE A LA ANTERIOR QUE ERA ALGORITMO DE BURBUJA
+    public static void ordenarPorVidaMetodoB(HashMap<String, Soldado> soldados) {
+        // Obtener los valores (los soldados) del HashMap y almacenarlos en una lista
+        List<Soldado> listaSoldados = new ArrayList<>(soldados.values());
+    
+        // Ordenar la lista en orden descendente por puntos de vida
+        Collections.sort(listaSoldados, new Comparator<Soldado>() {
+            public int compare(Soldado s1, Soldado s2) {
+                // Orden descendente por puntos de vida
+                return Integer.compare(s2.getPuntos(), s1.getPuntos());
+            }
+        });
+    
+        // Actualizar el HashMap con los soldados ordenados
+        int index = 0;
+        for (String clave : soldados.keySet()) {
+            soldados.put(clave, listaSoldados.get(index));
+            index++;
+        }
+    }
 }
