@@ -1,3 +1,7 @@
+// RONI COMPANOCCA CHECCO
+// CUI: 20210558
+// LABORATORIO 06
+// FUNDAMENTOS DE PROGRAMACION - LABORATORIO
 public class Soldado {
 	private String nombre;
 	private int fila;

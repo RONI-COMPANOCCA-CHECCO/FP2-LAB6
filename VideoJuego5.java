@@ -1,3 +1,7 @@
+// RONI COMPANOCCA CHECCO
+// CUI: 20210558
+// LABORATORIO 06 - HASHMAP
+// FUNDAMENTOS DE PROGRAMACION 
 import java.util.*;
 
 public class VideoJuego5 {
@@ -71,8 +75,8 @@ public class VideoJuego5 {
         // IMPRIMIR LOS DATOS DE LOS SOLDADOS ORDENADOS DE MAYOR A MENOR DEPENDIENDO DE SU NIVEL DE VIDA
         ArrayList<Soldado> listaSoldados1 = new ArrayList<>(ejercito1.values());
         ArrayList<Soldado> listaSoldados2 = new ArrayList<>(ejercito2.values());
-        ordenarPorVidaMetodoA(Soldados1);
-        ordenarPorVidaMetodoB(Soldados2);
+        ordenarPorVidaMetodoA(ejercito1);
+        ordenarPorVidaMetodoB(ejercito2);
         System.out.println("\nEjército 1 Ordenados por nivel de vida");
         for (Soldado soldado : listaSoldados1) {
             imprimir(soldado);
